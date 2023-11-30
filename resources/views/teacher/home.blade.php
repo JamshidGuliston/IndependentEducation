@@ -68,7 +68,7 @@
               <div class="activite-label">2021-2022</div>
               <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
               <div class="activity-content">
-                <h5><a href="#" class="fw text-dark">Qishki sessiya</a> </h5>
+                <h5><a href="#" class="fw text-dark"><b>Qishki sessiya</b></a> </h5>
                 <h5><a href="#" class="fw text-dark">Yozgi sessiya</a></h5>
               </div>
             </div><!-- End activity item-->
