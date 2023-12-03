@@ -76,7 +76,6 @@ class RegisteredUserController extends Controller
                 $d["H_Login"] = "null";
                 $d["H_img"] = $E_Data["image"];
                 $d['role'] = $role;
-
                 return $d;
             }
         }

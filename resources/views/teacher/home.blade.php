@@ -325,6 +325,7 @@
                   <input type="hidden" name="subject_id" value="{{ $item->subject_id }}">
                   <input type="hidden" name="subject_name" value="{{ $item->subject_name }}">
                   <input type="hidden" name="group_name" value="{{ $item->group_name }}">
+                  <input type="hidden" name="plan_id" value="{{ $item->plan_id }}">
                   <h5 class="card-title"><a href="#" onclick="event.preventDefault(); this.closest('form').submit()">{{ $item->group_name }}</a></h5>
                   <span class="text-success small pt-1 fw-bold">{{ $item->subject_name }}</span> <span class="text-muted small pt-2 ps-1"></span>
                 </form>

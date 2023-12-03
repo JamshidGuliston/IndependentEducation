@@ -33,23 +33,32 @@ class TeacherController extends Controller
         $groups = Plan_teacher::where('teacher_id', Auth::user()->userid)
                     ->join('plans', 'plans.id', '=', 'plan_teachers.plan_id')
                     ->get();
-
         return view('teacher.home', ['groups' => $groups]);
     }
 
     public function class(Request $request){
-        // dd($request->all());
-        return view('teacher.topic.main', ['data' => $request->all()]);
+
+
+  if(isset($request->data)){
+    $request=$request->data;
+  }
+//   dd($request());
+
+        // Topic::where('user_id', )
+        $lesson = Plan_topic::where('plan_id', $request['plan_id'])->join('topics', 'topics.id', '=', 'plan_topics.topic_id')->get();
+
+        return view('teacher.topic.main', ['data' => $request, 'lesson'=> $lesson]);
+        
     }
 
     public function page_create_topic(Request $request){
-        
+       
         return view('teacher.topic.adding_page', ['data' => $request->all()]);
     }
 
     public function create_topic(Request $request){
         // dd($request->all());
-        $plan_id = Plan::where('subject_id', $request->subject_id)->where('group_id', $request->group_id)->where('semester_id', $request->semester_id)->first()->id;
+        // 
         
         $newtopic = Topic::create([
             'user_id' => Auth::user()->userid,
@@ -58,24 +67,40 @@ class TeacherController extends Controller
             'task_id' => $request->test_id,
         ]);
 
+        
+
         Plan_topic::create([
-            'plan_id' => $plan_id,
+            'plan_id' => $request->plan_id,
             'topic_id' => $newtopic->id
         ]);
-
         return redirect()->route('teacher.group', ['data' => $request->all()]);
+        // return view('teacher.topic.main', ['data' => $request->all(),  'lesson'=> $lesson]);
     }
 
     public function page_edit_topic(Request $request){
-
+      $edite_les = Topic::where('id',$request->edite_les_id)->first();
+      dd($request->data);
+    return view('teacher.topic.edite', ['data' => $request->data, 'edite_les' => $edite_les]);
     }
 
     public function edit_topic(Request $request){
-        
+    Topic::where('id', $request->topic_id)->update([
+        'topicname'=>$request->title,
+        'text'=>$request->fulltext,
+        'task_id'=>$request->test_id,
+    ]);
+    return redirect()->route('teacher.group', ['data' => $request->all()]);
     }
 
     public function delete_topic(Request $request){
+        // dd($request->data['plan_id']);
+       Topic::where('id', $request->del_les_id)->first()->delete();
 
+       $lesson = Plan_topic::where('plan_id', $request->data['plan_id'])->join('topics', 'topics.id', '=', 'plan_topics.topic_id')->get();
+
+        return view('teacher.topic.main', ['data' => $request->data, 'lesson'=> $lesson]);
+
+    //    return redirect()->route('teacher.topic.main', [])
     }
 
 

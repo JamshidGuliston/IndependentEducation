@@ -32,6 +32,7 @@
                       <input type="hidden" name="subject_id" value="{{ $data['subject_id'] }}">
                       <input type="hidden" name="subject_name" value="{{ $data['subject_name'] }}">
                       <input type="hidden" name="group_name" value="{{ $data['group_name'] }}">
+                      <input type="hidden" name="plan_id" value="{{ $data['plan_id'] }}">
                       <h5>
                       <button type="submit" class="btn btn-light "><span class="text-success"><i class="bi bi-plus-circle"> Mavzu qo'shish</i></span></button>
                       </h5>
@@ -42,48 +43,42 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Position</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Start Date</th>
+                    <th scope="col">Mavzular</th>
+                    <th scope="col">Tahrirlash/O'chirsh</th>
                   </tr>
                 </thead>
                 <tbody>
+
+@foreach($lesson as $row)
+
                   <tr>
                     <th scope="row">1</th>
-                    <td>Brandon Jacob</td>
-                    <td>Designer</td>
-                    <td>28</td>
-                    <td>2016-05-25</td>
+                    <td>{{$row->topicname}}</td>
+                    <td> 
+                      
+                    <form method="POST" action="{{route('teacher.pageedittopic', ['data'=>$data, 'edite_les_id'=> $row->topic_id])}}">
+                        @csrf
+                        <a class="m-2" href="{{$row->topic_id}}" onclick="event.preventDefault();
+                                                this.closest('form').submit()">    
+                          <i class="bi bi-pen-fill"></i>
+                        </a>
+                    </form>
+                      <form method="POST" action="{{route('teacher.deletetopic', ['data'=>$data, 'del_les_id'=> $row->topic_id])}}">
+                        @csrf
+                            <input type="hidden" name="del_les_id" value="{{$row->topic_id}}">
+
+                        <a class="text-danger m-2"  onclick="event.preventDefault();
+                                                this.closest('form').submit()"> 
+  
+                        <i class="bi bi-trash-fill"></i>
+                    
+                        </a> 
+                      </form>                 
+                  </td>
                   </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Bridie Kessler</td>
-                    <td>Developer</td>
-                    <td>35</td>
-                    <td>2014-12-05</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Ashleigh Langosh</td>
-                    <td>Finance</td>
-                    <td>45</td>
-                    <td>2011-08-12</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td>Angus Grady</td>
-                    <td>HR</td>
-                    <td>34</td>
-                    <td>2012-06-11</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">5</th>
-                    <td>Raheem Lehner</td>
-                    <td>Dynamic Division Officer</td>
-                    <td>47</td>
-                    <td>2011-04-19</td>
-                  </tr>
+
+                  @endforeach
+                 
                 </tbody>
               </table>
               <!-- End Default Table Example -->
