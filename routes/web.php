@@ -36,6 +36,13 @@ Route::group(['prefix' => 'student', 'middleware' => ['isStudent', 'auth']], fun
 
 Route::group(['prefix' => 'teacher', 'middleware' => ['isTeacher', 'auth']], function () {
     Route::get('home', [TeacherController::class, 'index'])->name('teacher.home');
+    Route::get('class', [TeacherController::class, 'class'])->name('teacher.group');
+    Route::get('page_create_topic', [TeacherController::class, 'page_create_topic'])->name('teacher.pageaddingtopic');
+    Route::post('create_topic', [TeacherController::class, 'create_topic'])->name('teacher.addtopic');
+    Route::get('page_edit_topic', [TeacherController::class, 'page_edit_topic'])->name('teacher.pageedittopic');
+    Route::post('edit_topic', [TeacherController::class, 'edit_topic'])->name('teacher.edittopic');
+    Route::post('delete_topic', [TeacherController::class, 'delete_topic'])->name('teacher.deletetopic');
+    Route::post('joiningdata', [TeacherController::class, 'joining_data'])->name('teacher.getting');
 });
 
 require __DIR__.'/auth.php';

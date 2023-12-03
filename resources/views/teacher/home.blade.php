@@ -24,7 +24,7 @@
 <section class="section dashboard">
   <div class="row">
     <!-- Left side columns -->
-    <div class="col-lg-3">
+    <div class="col-lg-2">
 
       <!-- Recent Activity -->
       <div class="card">
@@ -42,7 +42,7 @@
         </div>
 
         <div class="card-body">
-          <h5 class="card-title">O'quv yili<span></span></h5>
+          <h5 class="card-title"><span></span></h5>
 
           <div class="activity">
 
@@ -50,8 +50,8 @@
               <div class="activite-label">2023-2024</div>
               <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
               <div class="activity-content">
-                <h5><a href="#" class="fw text-dark">Qishki sessiya</a> </h5>
-                <h5><a href="#" class="fw text-dark">Yozgi sessiya</a></h5>
+                <h5><a href="#" class="fw text-white">Qishki sessiya</a> </h5>
+                <h5><a href="#" class="fw text-white">Yozgi sessiya</a></h5>
               </div>
             </div><!-- End activity item-->
 
@@ -59,8 +59,8 @@
               <div class="activite-label">2022-2023</div>
               <i class='bi bi-circle-fill activity-badge text-muted  align-self-start'></i>
               <div class="activity-content">
-                <h5><a href="#" class="fw text-dark">Qishki sessiya</a> </h5>
-                <h5><a href="#" class="fw text-dark"> Yozgi sessiya</a></h5>
+                <h5><a href="#" class="fw text-white">Qishki sessiya</a> </h5>
+                <h5><a href="#" class="fw text-white"> Yozgi sessiya</a></h5>
               </div>
             </div><!-- End activity item-->
 
@@ -68,8 +68,8 @@
               <div class="activite-label">2021-2022</div>
               <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
               <div class="activity-content">
-                <h5><a href="#" class="fw text-dark"><b>Qishki sessiya</b></a> </h5>
-                <h5><a href="#" class="fw text-dark"><b>Yozgi sessiya</b></a></h5>
+                <h5><a href="#" class="fw text-white"><b>Qishki sessiya</b></a> </h5>
+                <h5><a href="#" class="fw text-white"><b>Yozgi sessiya</b></a></h5>
               </div>
             </div><!-- End activity item-->
 
@@ -287,16 +287,14 @@
 
         </div>
       </div> -->
-      
-
-    </div>
+      </div>
     <!-- End Left side columns -->
 
     <!-- Right side columns -->
-    <div class="col-lg-9">
+    <div class="col-lg-10">
       <div class="row">
-
         <!-- Sales Card -->
+        @foreach($groups as $item)
         <div class="col-xxl-4 col-md-6">
           <div class="card info-card sales-card">
 
@@ -306,7 +304,6 @@
                 <li class="dropdown-header text-start">
                   <h6>Filter</h6>
                 </li>
-
                 <li><a class="dropdown-item" href="#">Today</a></li>
                 <li><a class="dropdown-item" href="#">This Month</a></li>
                 <li><a class="dropdown-item" href="#">This Year</a></li>
@@ -314,60 +311,41 @@
             </div>
 
             <div class="card-body">
-              <h5 class="card-title">Sales <span>| Today</span></h5>
+              <h5 class="card-title">{{ $item->trainingTypeName }} <span>| tugatilmagan</span></h5>
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-cart"></i>
+                  <i class="bi bi-book-half"></i>
                 </div>
                 <div class="ps-3">
-                  <h6>145</h6>
-                  <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
+                <form method="GET" action="class">
+                  @csrf
+                  <input type="hidden" name="group_id" value="{{ $item->group_id }}">
+                  <input type="hidden" name="semester_id" value="{{ $item->semester_id }}">
+                  <input type="hidden" name="subject_id" value="{{ $item->subject_id }}">
+                  <input type="hidden" name="subject_name" value="{{ $item->subject_name }}">
+                  <input type="hidden" name="group_name" value="{{ $item->group_name }}">
+                  <h5 class="card-title"><a href="#" onclick="event.preventDefault(); this.closest('form').submit()">{{ $item->group_name }}</a></h5>
+                  <span class="text-success small pt-1 fw-bold">{{ $item->subject_name }}</span> <span class="text-muted small pt-2 ps-1"></span>
+                </form>
                 </div>
               </div>
             </div>
 
           </div>
         </div><!-- End Sales Card -->
+        @endforeach
 
-        <!-- Revenue Card -->
-        <div class="col-xxl-4 col-md-6">
-          <div class="card info-card revenue-card">
-
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
-            <div class="card-body">
-              <h5 class="card-title">Revenue <span>| This Month</span></h5>
-
-              <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-currency-dollar"></i>
-                </div>
-                <div class="ps-3">
-                  <h6>$3,264</h6>
-                  <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div><!-- End Revenue Card -->
-
+        @if($groups->count() == 0)
+          <span class="border border-danger text-center" style="background-color: #ffcc9d;">Ma'lumotlariz ushbu tizimda topilmadi. Agar hemis tizimidan ma'lumotlarni olishini istasangiz ushbu tugmani bosing. 
+          <form method="POST" action="{{ route('teacher.getting') }}">
+            @csrf
+            <a href="#" onclick="event.preventDefault(); this.closest('form').submit()"> davom etish</a>
+          </form>
+          </span>
+        @endif
         <!-- Customers Card -->
-        <div class="col-xxl-4 col-xl-12">
+        <!-- <div class="col-xxl-4 col-xl-12">
 
           <div class="card info-card customers-card">
 
@@ -401,10 +379,11 @@
             </div>
           </div>
 
-        </div><!-- End Customers Card -->
+        </div> -->
+        <!-- End Customers Card -->
 
         <!-- Reports -->
-        <div class="col-12">
+        <!-- <div class="col-12">
           <div class="card">
 
             <div class="filter">
@@ -423,7 +402,6 @@
             <div class="card-body">
               <h5 class="card-title">Reports <span>/Today</span></h5>
 
-              <!-- Line Chart -->
               <div id="reportsChart"></div>
 
               <script>
@@ -478,15 +456,15 @@
                   }).render();
                 });
               </script>
-              <!-- End Line Chart -->
 
             </div>
 
           </div>
-        </div><!-- End Reports -->
+        </div> -->
+        <!-- End Reports -->
 
         <!-- Recent Sales -->
-        <div class="col-12">
+        <!-- <div class="col-12">
           <div class="card recent-sales overflow-auto">
 
             <div class="filter">
@@ -557,10 +535,11 @@
             </div>
 
           </div>
-        </div><!-- End Recent Sales -->
+        </div> -->
+        <!-- End Recent Sales -->
 
         <!-- Top Selling -->
-        <div class="col-12">
+        <!-- <div class="col-12">
           <div class="card top-selling overflow-auto">
 
             <div class="filter">
@@ -631,7 +610,8 @@
             </div>
 
           </div>
-        </div><!-- End Top Selling -->
+        </div> -->
+        <!-- End Top Selling -->
 
       </div>
     </div><!-- End Right side columns -->

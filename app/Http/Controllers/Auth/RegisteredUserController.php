@@ -59,6 +59,7 @@ class RegisteredUserController extends Controller
             $st = User::where('hid', '=', $S_Data["student_id_number"])->first();
             if(!isset($st->hid)){
                 $d['name'] = $S_Data["short_name"];
+                $d['id'] = $S_Data["id"];
                 $d['H_ID'] = $S_Data["student_id_number"];
                 $d["H_Login"] = $password;
                 $d["H_img"] = $S_Data["image"];
@@ -70,6 +71,7 @@ class RegisteredUserController extends Controller
             $tch = User::where('hid', '=', $E_Data["employee_id_number"])->first();
             if(!isset($tch->hid)){
                 $d['name'] = $E_Data["short_name"];
+                $d['id'] = $E_Data["id"];
                 $d['H_ID'] = $E_Data["employee_id_number"];
                 $d["H_Login"] = "null";
                 $d["H_img"] = $E_Data["image"];
@@ -96,6 +98,7 @@ class RegisteredUserController extends Controller
             $user = User::create([
                 'name' => $data['name'],
                 'hid' => $data['H_ID'],
+                'userid' => $data['id'],
                 'hpassword' => $request->password,
                 'himg' => $data['H_img'],
                 'email' => 'hemis'.$data['H_ID']."@gmail.com",

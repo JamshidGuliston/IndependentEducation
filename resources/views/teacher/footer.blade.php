@@ -1,7 +1,7 @@
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span></span></strong>
+      &copy; Guliston Davlat Universiteti <strong><span></span></strong>
     </div>
     <div class="credits">
     </div>

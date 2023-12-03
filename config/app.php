@@ -123,6 +123,8 @@ return [
 
     'key' => env('APP_KEY'),
 
+    'API_token' => "mM7veNzwzaGLzkw1YW30fqQpxTo840wu",
+
     'cipher' => 'AES-256-CBC',
 
     /*

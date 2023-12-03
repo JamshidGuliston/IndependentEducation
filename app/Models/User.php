@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'hid',
         'himg',
+        'userid',
         'hpassword',
         'email',
         'password',
