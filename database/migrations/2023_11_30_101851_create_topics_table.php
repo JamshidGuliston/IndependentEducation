@@ -13,7 +13,9 @@ return new class extends Migration
             $table->integer('user_id');
             $table->string("topicname");
             $table->longtext("text");
-            $table->unsignedBigInteger("task_id");
+            $table->unsignedBigInteger("test_id");
+            $table->date('start_time_of_test');
+            $table->date('finish_time_of_test');
             $table->timestamps();
         });
     }

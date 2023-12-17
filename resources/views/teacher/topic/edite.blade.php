@@ -13,17 +13,21 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
+            @if (isset($data["subject_name"])) 
               <h5 class="card-title"><span class="text-danger">Fan nomi:</span> {{ $data["subject_name"] }} <span class="text-danger">Guruh:</span> {{ $data["group_name"] }}</h5>
-              <!-- Vertical Form -->
+            @endif
               <form class="row g-3" method="POST" action="edit_topic">
                 @csrf
-                <input type="hidden" name="group_id" value="{{ $data['group_id'] }}">
-                <input type="hidden" name="semester_id" value="{{ $data['semester_id'] }}">
-                <input type="hidden" name="subject_id" value="{{ $data['subject_id'] }}">
-                <input type="hidden" name="subject_name" value="{{ $data['subject_name'] }}">
-                <input type="hidden" name="group_name" value="{{ $data['group_name'] }}">
-                <input type="hidden" name="plan_id" value="{{ $data['plan_id'] }}">
-                <input type="hidden" name="topic_id" value="{{$edite_les['id']}}">
+                @if (isset($data["subject_name"])) 
+                    <input type="hidden" name="group_id" value="{{ $data['group_id'] }}">
+                    <input type="hidden" name="semester_id" value="{{ $data['semester_id'] }}">
+                    <input type="hidden" name="subject_id" value="{{ $data['subject_id'] }}">
+                    <input type="hidden" name="subject_name" value="{{ $data['subject_name'] }}">
+                    <input type="hidden" name="group_name" value="{{ $data['group_name'] }}">
+                    <input type="hidden" name="plan_id" value="{{ $data['plan_id'] }}">
+                    <input type="hidden" name="topic_id" value="{{$edite_les['id']}}">
+                @endif
+                @if (isset($edite_les['topicname'])) 
                 <div class="col-12">
                     <div class="card-body">
                         <label for="inputNanme4" class="form-label">Mavzu nomi:</label>
@@ -48,7 +52,7 @@
                   <button type="submit" class="btn btn-success">Saqlash</button>
                 </div>
               </form><!-- Vertical Form -->
-
+              @endif
             </div>
         </div>
     </div>
