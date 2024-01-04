@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('question_options', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('question_id');
-            $table->string('option_text');
+            $table->longText('option_text');
             $table->boolean('correct');
             $table->timestamps();
         });

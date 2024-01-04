@@ -12,11 +12,11 @@
 <main id="main" class="main">
 
 <div class="pagetitle">
-  <h1>Barcha testlar</h1>
+  <h1></h1>
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">Bosh sahifa</a></li>
-      <li class="breadcrumb-item active">Testlar</li>
+      <li class="breadcrumb-item active">Mavzular</li>
     </ol>
   </nav>
 </div><!-- End Page Title -->
@@ -30,28 +30,26 @@
 
     <!-- Table with stripped rows -->
     <table class="table datatable">
-        <h5 class="card-title">Testlar</h5>
+        <h5 class="card-title">Mavzular</h5>
       <thead>
         <tr>
           <th>
-            <b>Nomi</b>
+            <b>Mavzu nomi</b>
           </th>
           <th>Fan nomi</th>
-          <th>Test turi</th>
-          <th>Savollar soni</th>
-          <th>O'zgartirish / o'chirish</th>
+          <th>Test nomi</th>
+          <th>ko'rish / o'zgartirish / o'chirish</th>
         </tr>
       </thead>
       <tbody>
-      @foreach($tests as $item)  
+      @foreach($topics as $item)  
       <?php
       ?>
         <tr>
-          <td>{{ $item->test_name }}</td>
+          <td>{{ $item->topicname }}</td>
           <td>{{ $item->subj_name }}</td>
-          <td>{{ $item->cat_name }}</td>
-          <td>25</td>
-          <td></td>
+          <td>{{ $item->task_name }}</td>
+          <td style="text-align: end;"><button type="button" class="btn btn-success"><i class="bi bi-eye"></i></button> <button type="button" class="btn btn-warning"><i class="bi bi-pencil-square"></i></button>  <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
         </tr>
       @endforeach
         

@@ -32,15 +32,17 @@ Route::middleware('auth')->group(function () {
 
 Route::group(['prefix' => 'student', 'middleware' => ['isStudent', 'auth']], function () {
     Route::get('home', [StudentController::class, 'index'])->name('student.home');
+    Route::get('insubject/{id}', [StudentController::class, 'insubject'])->name('student.insubject');
+    Route::get('takequestions', [StudentController::class, 'takequestions'])->name('student.takequestions');
+
 });
 
 Route::group(['prefix' => 'teacher', 'middleware' => ['isTeacher', 'auth']], function () {
     Route::post('joiningdata', [TeacherController::class, 'joining_data'])->name('teacher.getting');
     Route::get('home', [TeacherController::class, 'index'])->name('teacher.home');
     Route::get('class', [TeacherController::class, 'class'])->name('teacher.group');
-    // for topic
-    Route::get('page_create_topic', [TeacherController::class, 'page_create_topic'])->name('teacher.pageaddingtopic');
-    Route::post('create_topic', [TeacherController::class, 'create_topic'])->name('teacher.addtopic');
+    // for topic in group
+    Route::post('plantopic', [TeacherController::class, 'plantopic'])->name('teacher.plantopic');
     Route::post('page_edit_topic', [TeacherController::class, 'page_edit_topic'])->name('teacher.pageedittopic');
     Route::post('edit_topic', [TeacherController::class, 'edit_topic'])->name('teacher.edittopic');
     Route::post('delete_topic', [TeacherController::class, 'delete_topic'])->name('teacher.deletetopic');
@@ -52,7 +54,13 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['isTeacher', 'auth']], fun
     Route::post('page_edit_test', [TeacherController::class, 'page_edit_test'])->name('teacher.pageedittest');
     Route::post('edit_test', [TeacherController::class, 'edit_test'])->name('teacher.edittest');
     Route::post('delete_test', [TeacherController::class, 'delete_test'])->name('teacher.deletetest');
-    
+    // for topic
+    Route::get('page_create_topic', [TeacherController::class, 'page_create_topic'])->name('teacher.pageaddingtopic');
+    Route::get('select_tests', [TeacherController::class, 'select_tests'])->name('teacher.select_tests');
+    Route::post('create_topic', [TeacherController::class, 'create_topic'])->name('teacher.addtopic');
+    Route::get('alltopics', [TeacherController::class, 'get_topics'])->name('teacher.alltopics');
+
+
 });
 
 require __DIR__.'/auth.php';

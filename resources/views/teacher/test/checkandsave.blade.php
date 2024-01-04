@@ -16,7 +16,7 @@
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">Bosh sahifa</a></li>
-      <li class="breadcrumb-item"><a href="/">Test yaratish</a></li>
+      <li class="breadcrumb-item"><a href="/teacher/page_creating_test">Test yaratish</a></li>
       <li class="breadcrumb-item active">Testni ko'rish</li>
     </ol>
   </nav>
@@ -31,11 +31,14 @@
               <!-- No Labels Form -->
               <form class="row g-3" method="POST" action="correct_test" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="title" value="{{ $aboutTest['title'] }}" />
+                <input type="hidden" name="category" value="{{ $aboutTest['category'] }}" />
+                <input type="hidden" name="subject" value="{{ $aboutTest['subject'] }}" />
                 <div class="col-md-12">
                 @foreach ($paragraphs as $paragraph) 
-                    @if($loop->iteration % 5 == 1)
+                    @if(($loop->iteration % 5 == 1 and $aboutTest['category'] == 1) or $aboutTest['category'] != 1)
                     <div class="alert border-primary alert-dismissible fade show">
-                        <p>{{ceil($loop->iteration / 5) }}-savol</p>
+                        <p>{{ ($aboutTest['category'] == 1) ? ceil($loop->iteration / 5) : $loop->iteration }}-savol</p>
                         <p class="mb-0"><input type="hidden" name="data[]" value="{{$paragraph}}">{!! $paragraph !!}</p>
                         <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
                     </div>
@@ -55,7 +58,7 @@
     
                 <div class="text-center">
                 <button type="submit" name="delete" class="btn btn-danger ml-3 mr-3">Qayta yuklash </button>
-                @if(count($paragraphs) % 5 == 0)
+                @if((count($paragraphs) % 5 == 0 and count($paragraphs) != 0) or $aboutTest['category'] != 1)
                     <button type="submit" name="save" class="btn btn-primary">Tasdiqlash</button>
                 @else
                     <span>Testda xatolik bor. Ortiqcha qator qo'shilgan. iltimos qayta yuklang</span>

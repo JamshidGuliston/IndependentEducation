@@ -11,11 +11,10 @@ return new class extends Migration
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->integer('subject_id');
             $table->string("topicname");
             $table->longtext("text");
-            $table->unsignedBigInteger("test_id");
-            $table->date('start_time_of_test');
-            $table->date('finish_time_of_test');
+            $table->unsignedBigInteger("task_id");
             $table->timestamps();
         });
     }

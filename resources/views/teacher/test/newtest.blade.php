@@ -39,24 +39,35 @@
                 <div class="col-md-6">
                     <label for="inputNanme4" class="form-label">Test turi</label>
                     <select id="inputState" name="category" class="form-select" required>
-                        <option selected="">Tanlang...</option>
-                        <option>Variantli test</option>
-                        <option>Fayl yuboriladigan test</option>
-                        <option>Javobi yoziladigan test</option>
+                        <option selected="">-Tanlash-</option>
+                        @foreach($testcategories as $item)
+                            <option value="{{ $item->id }}">{{ $item->category_name }}</option>
+                        @endforeach
                   </select>
                 </div>
                 <div class="col-md-6">
                     <label for="inputNanme4" class="form-label">Fan</label>
                     <select id="inputState" name="subject" class="form-select" required>
-                        <option selected="">Tanlang...</option>
-                        <option>...</option>
+                        <option selected="">-Tanlash-</option>
+                        @foreach($lessons as $item)
+                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="col-6">
-                    <label for="inputNanme4" class="form-label">Test faylini yuklash (.doc)</label>
-                    <input type="file" name="file" class="form-control" placeholder="Address" accept=".docx" required>
+                    <label for="inputNanme4" class="form-label">Test faylini yuklash <span style="color: red;">(fayl .docx formatda  bo'lishi kerak)</span></label>
+                    <input type="file" name="file" class="form-control" placeholder="Address" accept=".docx" required><br>
                     @if ($errors->has('myFile'))
                         <div {{ $errors->first('myFile') }}</div>
+                    @endif
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                     @endif
                 </div>
                 <div class="text-center">

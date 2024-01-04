@@ -10,6 +10,7 @@ class Topic extends Model
     use HasFactory;
     protected $fillable = [
         'user_id',
+        'subject_id',
         'topicname',
         'text',
         'task_id',

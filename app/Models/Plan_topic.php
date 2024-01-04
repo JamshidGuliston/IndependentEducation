@@ -8,9 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Plan_topic extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'plan_id',
-        'topic_id'
-    ];
+    // protected $primaryKey = ['plan_id', 'topic_id'];
+    protected $fillable = ['plan_id', 'topic_id'];
 }

@@ -13,35 +13,52 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-              <h5 class="card-title"><span class="text-danger">Fan nomi:</span> {{ $data["subject_name"] }} <span class="text-danger">Guruh:</span> {{ $data["group_name"] }}</h5>
-              <!-- Vertical Form -->
-              <form class="row g-3" method="POST" action="create_topic">
-                @csrf
-                <input type="hidden" name="group_id" value="{{ $data['group_id'] }}">
-                <input type="hidden" name="semester_id" value="{{ $data['semester_id'] }}">
-                <input type="hidden" name="subject_id" value="{{ $data['subject_id'] }}">
-                <input type="hidden" name="subject_name" value="{{ $data['subject_name'] }}">
-                <input type="hidden" name="group_name" value="{{ $data['group_name'] }}">
-                <input type="hidden" name="plan_id" value="{{ $data['plan_id'] }}">
+                <h5 class="card-title">Mavzu yaratish</h5>
+            <form class="row g-3" method="POST" action="create_topic">
+            @csrf
                 <div class="col-12">
                     <div class="card-body">
-                        <label for="inputNanme4" class="form-label">Mavzu nomi:</label>
-                        <input type="text" class="form-control" id="inputNanme4" name="title">
+                        <label for="selectsubject" class="form-label">Fan</label>
+                        <select id="selectsubject" name="subject" class="form-select" onchange="changeFunc();" required>
+                            <option selected="">-Tanlash-</option>
+                            @foreach($subjects as $item)
+                                <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="card-body">
-                        <h5 class="card-title">Mavzu matni</h5>
-                        <textarea class="tinymce-editor" name="fulltext">
+                        <label for="inputNanme4" class="form-label">Mavzu nomi:</label>
+                        <input type="text" class="form-control" id="inputNanme4" name="title" required>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card-body">
+                        <h5>Mavzu matni</h5>
+                        <textarea class="tinymce-editor" name="fulltext" required>
                         </textarea>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="card-body">
-                        <label for="inputAddress" class="form-label">Baholash</label>
-                        <input type="text" name="test_id" class="form-control" id="inputAddress" placeholder="Qidirish">
+                        <label for="inputAddress" class="form-label">Topshiriq</label>
+                        <div class="taskoptions">
+                    </div>  
                     </div>
                 </div>
+                @if ($errors->has('myFile'))
+                    <div {{ $errors->first('myFile') }}</div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="text-center">
                   <button type="submit" class="btn btn-success">Saqlash</button>
                 </div>
@@ -55,4 +72,24 @@
 
 @section('footer')
     @include('teacher.footer'); 
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script>
+        function changeFunc() {
+            var selectBox = document.getElementById("selectsubject");
+            var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+            
+            var div = $('.taskoptions');
+            var route = "{{ route('teacher.select_tests') }}";
+            $.ajax({
+                method: "GET",
+                url: route,
+                data: {
+                    'subject_id': selectedValue,
+                },
+                success: function(data) {
+                    div.html(data);
+                }
+            });
+        }
+    </script>
 @endsection

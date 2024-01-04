@@ -45,7 +45,15 @@
                 <div class="col-12">
                     <div class="card-body">
                         <label for="inputAddress" class="form-label">Baholash</label>
-                        <input type="text" name="test_id" class="form-control" value="{{$edite_les['task_id']}}" id="inputAddress" placeholder="Qidirish">
+                        <select id="inputState" name="test_id" class="form-select" required>
+                            @foreach($tests as $item)
+                                @if($item['id'] == $edite_les['task_id'])
+                                    <option value="{{ $item['id'] }}" selected="">{{ $item['test_name'] }}</option>
+                                @else
+                                    <option value="{{ $item['id'] }}">{{ $item['test_name'] }}</option>
+                                @endif
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="text-center">
