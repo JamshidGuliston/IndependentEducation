@@ -34,6 +34,8 @@
                 <input type="hidden" name="title" value="{{ $aboutTest['title'] }}" />
                 <input type="hidden" name="category" value="{{ $aboutTest['category'] }}" />
                 <input type="hidden" name="subject" value="{{ $aboutTest['subject'] }}" />
+                <input type="hidden" name="count" value="{{ $aboutTest['count'] }}" />
+                <input type="hidden" name="timer" value="{{ $aboutTest['timer'] }}" />
                 <div class="col-md-12">
                 @foreach ($paragraphs as $paragraph) 
                     @if(($loop->iteration % 5 == 1 and $aboutTest['category'] == 1) or $aboutTest['category'] != 1)

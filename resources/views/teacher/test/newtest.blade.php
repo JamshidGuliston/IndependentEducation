@@ -70,6 +70,22 @@
                         </div>
                     @endif
                 </div>
+
+                <div class="col-md-6">
+                <div class="form-group">
+    <label for="exampleInputEmail1">Tushadigan Savollar soni</label>
+    <input type="number" name="count" class="form-control" id="exampleInputEmail1" placeholder="raqam">
+    <small id="emailHelp" class="form-text text-muted">.</small>
+  </div>
+                </div>
+
+                <div class="col-md-6">
+                <div class="form-group">
+    <label for="exampleInputEmail1">Test vaqtini minut ko'rinishida yozing misol uchun 60 </label>
+    <input type="number" name="timer" class="form-control" id="exampleInputEmail1" placeholder="raqam">
+    <small id="emailHelp" class="form-text text-muted">.</small>
+  </div>
+                </div>
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary">Saqlash</button>
                 </div>

@@ -15,6 +15,7 @@ class Test extends Model
         'subject_id',
         'assessment_id',
         'testcategory_id',
-        'limit'
+        'limit_questions',
+        'timer',
     ];
 }

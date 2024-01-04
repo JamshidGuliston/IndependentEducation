@@ -148,6 +148,7 @@ class TeacherController extends Controller
     }
 
     public function create_test(Request $request){
+
         $request->validate([
             'file' => [File::types(['docx'])]
         ]);
@@ -190,7 +191,8 @@ class TeacherController extends Controller
                 'subject_id' => $request->subject,
                 'assessment_id' => 1,
                 'testcategory_id' => $request->category,
-                'limit' => 60
+                'limit_questions'=> $request->count,
+                'timer'=> $request->timer,
             ]);
 
             foreach($request->data as $key => $item){
